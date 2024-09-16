@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Content</title>
+  <link rel="stylesheet" href="../styles.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="logo-section">
+          <img src="../homepage/assets/logo.png" alt="Logo">
+          <h1 class="logo-name">ECOSTATS</h1>
+        </div>
+        <nav class="nav-links">
+          <a href="../homepage/homepage.html">Home</a>
+          <a href="../dashboard/dashboard.html">Dashboard</a>
+          <a href="../reports/reports.html">Reports</a>
+        </nav>
+        <div class="search-container">
+          <input type="text" placeholder="Search..." id="search-bar">
+          <i class='bx bx-search'></i>
+        </div>
+        <div class="user-profile" id="user-profile">
+          <i class='bx bx-user'></i>
+          <div class="dropdown" id="dropdown">
+            <a href="#" id="sign-in">Sign In</a>
+            <a href="#" id="logout">Logout</a>
+          </div>
+        </div>
+      </header>
+      
+      <aside class="sidebar">
+        <h2 class="sidebar-title">REPORTS</h2>
+        <div class="dropdown-container">
+          <button class="dropdown-btn">Land Management<i class='bx bx-chevron-down'></i></button>
+          <div class="dropdown-content">
+            <a href="#report1" onclick="showContent('report1')">Report 1</a>
+            <a href="#report2" onclick="showContent('report2')">Report 2</a>
+          </div>
+        </div>
+        <div class="dropdown-container">
+          <button class="dropdown-btn">Forestry Management<i class='bx bx-chevron-down'></i></button>
+          <div class="dropdown-content">
+            <a href="#report3" onclick="showContent('report3')">Report 3</a>
+            <a href="#report4" onclick="showContent('report4')">Report 4</a>
+          </div>
+        </div>
+        <div class="dropdown-container">
+          <button class="dropdown-btn">Biodiversity Management<i class='bx bx-chevron-down'></i></button>
+          <div class="dropdown-content">
+            <a href="#report5" onclick="showContent('report5')">Report 5</a>
+            <a href="#report6" onclick="showContent('report6')">Report 6</a>
+          </div>
+        </div>
+      </aside>
+
+  <main class="main-content">
+    <div class="table-container">
+      <div class="button-container">
+        <button id="save-btn">Save</button>
+        <button id="add-row-btn">Add Row</button>
+        <button id="add-col-btn">Add Column</button>
+      </div>
+
+      <table id="edit-table" contenteditable="true">
+        <thead>
+          <tr>
+            <th colspan="9">
+              <h3>CENRO: PENRO: MARINDUQUE</h3>
+              <h3>REGION: IV-B</h3>
+            </th>
+          </tr>
+          <tr>
+            <th>
+              <h5>Function: Management and Development of Protected Areas</h5>
+              <h5>Activity: Monitoring of Protected Area Visitors</h5>
+            </th>
+            <th colspan="7">
+              <h4>PROTECTED AREAS, WILDLIFE AND COASTAL ZONE MANAGEMENT SERVICE Statistical Report</h4>
+              <h5>1st Quarter CY 2023</h5>
+            </th>
+            <th>
+              <h5>DENR Statistical Form 5</h5>
+              <h5>PAWCZMS Statistical Form 1a</h5>
+            </th>
+          </tr>
+          <tr>
+            <th rowspan="3">Protected Area</th>
+            <th colspan="3">Local</th>
+            <th colspan="3">Foreign</th>
+            <th rowspan="3">Total Number of Visitors</th>
+            <th rowspan="3">Remarks</th>
+          </tr>
+          <tr>
+            <th colspan="2">Sex</th>
+            <th rowspan="2">Total</th>
+            <th colspan="2">Sex</th>
+            <th rowspan="2">Total</th>
+          </tr>
+          <tr>
+            <th>M</th>
+            <th>F</th>
+            <th>M</th>
+            <th>F</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Area Name</td>
+            <td>5</td>
+            <td>10</td>
+            <td>15</td>
+            <td>3</td>
+            <td>7</td>
+            <td>10</td>
+            <td>25</td>
+            <td>Some remarks here</td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <table style="margin-top: 20px;">
+        <tr>
+          <td>Prepared by:</td>
+          <td>Reviewed by:</td>
+          <td>Approved by:</td>
+        </tr>
+        <tr contenteditable="true">
+          <td>Name<br>Position</td>
+          <td>Name<br>Position</td>
+          <td>Name<br>Position</td>
+        </tr>
+      </table>
+    </div>
+  </main>
+
+  <script>
+    // Add Row Function
+    document.getElementById('add-row-btn').addEventListener('click', function() {
+      const table = document.getElementById('edit-table').getElementsByTagName('tbody')[0];
+      const newRow = table.insertRow();
+      for (let i = 0; i < 9; i++) {
+        const newCell = newRow.insertCell(i);
+        newCell.contentEditable = "true";
+        newCell.innerHTML = "Edit here";  // Default content for new cells
+      }
+    });
+
+    // Add Column Function
+    document.getElementById('add-col-btn').addEventListener('click', function() {
+      const table = document.getElementById('edit-table');
+      const header = table.getElementsByTagName('thead')[0].rows[0];
+      const headerCell = document.createElement('th');
+      headerCell.innerHTML = "New Column";
+      header.appendChild(headerCell);
+
+      const rows = table.getElementsByTagName('tbody')[0].rows;
+      for (let i = 0; i < rows.length; i++) {
+        const cell = rows[i].insertCell(-1);
+        cell.contentEditable = "true";
+        cell.innerHTML = "Edit here";
+      }
+    });
+
+    // Save Function (Redirect back to the main page)
+    document.getElementById('save-btn').addEventListener('click', function() {
+      alert("Content saved!");
+      window.location.href = "../dashboard/dashboard.html"; // Redirect back to the dashboard or main page
+    });
+  </script>
+</body>
+</html>
